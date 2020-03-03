@@ -12,7 +12,7 @@ describe Unitpay::Controller do
     end
 
     def service
-      Unitpay::Service.new('public_key', 'secret_key')
+      Unitpay::Service.new('domain', 'public_key', 'secret_key')
     end
   end
 

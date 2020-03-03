@@ -5,9 +5,9 @@
 
 # Unitpay
 
-Gem для подключения к платежному шлюзу [unitpay](http://unitpay.ru).
+Gem для подключения к платежному шлюзу [unitpay.money](http://unitpay.money) и [unitpay.ru](http://unitpay.ru).
 
-[Документация к шлюзу](http://help.unitpay.ru/)
+Документация к шлюзу [help.unitpay.ru](http://help.unitpay.money/) и [help.unitpay.ru](http://help.unitpay.ru/)
 
 - [Установка](#installation)
 - [Подключение](#setup)
@@ -32,17 +32,17 @@ gem 'unitpay'
     $ gem install unitpay
 
 ##<a name="setup"></a> Подключение
-Чтобы получить доступ к сервисному классу, достаточно проинициализировать его с `public` и `secret` ключами.
+Чтобы получить доступ к сервисному классу, достаточно проинициализировать его с вашим рабочим доменом (`unitpay.money` или `unitpay.ru`) и `public` и `secret` ключами.
 
 ```ruby
-Unitpay::Service.new('unitpay_public_key', 'unitpay_secret_key')
+Unitpay::Service.new('domain', 'unitpay_public_key', 'unitpay_secret_key')
 ```
 
 По умолчанию курс валюты выставлен в `RUB`, а использование сигнатуры в `true`.
 Переопределить их можно и при инициализации.
 ```ruby
 use_sign, currency = false, 'RUB'
-Unitpay::Service.new('unitpay_public_key', 'unitpay_secret_key', use_sign, currency)
+Unitpay::Service.new('domain', 'unitpay_public_key', 'unitpay_secret_key', use_sign, currency)
 ```
 Чтобы включить проверку сигнатуры со стороны `unitpay`, необходимо нажать на "замочек" в настройках вашего партнера.
 
@@ -65,9 +65,10 @@ Unitpay::Service.new('unitpay_public_key', 'unitpay_secret_key', use_sign, curre
 
 ```ruby
 sum, account, desc = 100, 1, 'description'
-service = Unitpay::Service.new('unitpay_public_key', 'unitpay_secret_key')
+service = Unitpay::Service.new('domain', 'unitpay_public_key', 'unitpay_secret_key')
 service.payment_url(sum, account, desc)
-# => 'https://unitpay.ru/pay/public_key?sum=100&account=1&desc=description...'
+# => domain - 'unitpay.money' or 'unitpay.ru'
+# => 'https://domain/pay/public_key?sum=100&account=1&desc=description...'
 ```
 
 ##<a name="rails"></a> Использование в  Rails
@@ -123,13 +124,12 @@ class UnitpayController < ApplicationController
 
   def service
     # ВНИМАНИЕ: обязательный метод! Используется при проверке сигнатуры.
-    Unitpay::Service.new('unitpay_public_key', 'unitpay_secret_key')
+    Unitpay::Service.new('domain', 'unitpay_public_key', 'unitpay_secret_key')
   end
 end
 ```
 
-[Описание параметров, передаваемых при запросе.
-](http://help.unitpay.ru/article/35-confirmation-payment)
+Описание параметров, передаваемых при запросе: [help.unitpay.money](http://help.unitpay.money/article/35-confirmation-payment) и [help.unitpay.ru](http://help.unitpay.ru/article/35-confirmation-payment)
 
 ### Исключения при обработке запросов
 
@@ -216,7 +216,7 @@ class OrdersController < ApplicationController
   def unitpay_service
     # Внимание: не храните ключи в открытом виде в репозитории.
     # используйте  конфигурационные файлы (https://github.com/binarylogic/settingslogic) 
-    Unitpay::Service.new('public_key', 'secret_key')
+    Unitpay::Service.new('domain', 'public_key', 'secret_key')
   end
   
   def permitted_params

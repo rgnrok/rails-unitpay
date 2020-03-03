@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['ssnikolay']
   spec.email         = ['ssnikolay@gmail.com']
 
-  spec.summary       = 'Gem для подключения к платежной системе unitpay.ru'
-  spec.description   = 'Gem для подключения к платежной системе unitpay.ru'
+  spec.summary       = 'Gem для подключения к платежной системе UnitPay'
+  spec.description   = 'Gem для подключения к платежной системе UnitPay'
   spec.homepage      = 'https://github.com/ssnikolay/unitpay'
   spec.license       = 'MIT'
 

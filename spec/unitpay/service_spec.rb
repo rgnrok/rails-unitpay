@@ -1,5 +1,5 @@
 describe Unitpay::Service do
-  let(:service) { described_class.new('public_key', 'secret_key', use_sign) }
+  let(:service) { described_class.new('domain', 'public_key', 'secret_key', use_sign) }
 
   let(:sum) { 100 }
   let(:account) { 1 }
@@ -107,6 +107,6 @@ describe Unitpay::Service do
   describe '#payment_url' do
     subject { service.payment_url(sum, account, desc) }
 
-    it { is_expected.to eq "https://unitpay.ru/pay/public_key?sum=100&account=1&desc=description&currency=RUB&signature=#{ valid_signature }" }
+    it { is_expected.to eq "https://domain/pay/public_key?sum=100&account=1&desc=description&currency=RUB&signature=#{ valid_signature }" }
   end
 end

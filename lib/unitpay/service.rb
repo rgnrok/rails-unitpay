@@ -1,10 +1,10 @@
 module Unitpay
   class Service
     EXTRA_OPTIONS = [:locale, :hideHint, :hideBackUrl, :hideOrderCost, :hideMenu, :hideDesc, :hideOtherMethods]
-    URL = 'https://unitpay.ru/pay'
 
-    def initialize(public_key, secret_key, use_sign = true, currency = 'RUB')
+    def initialize(domain, public_key, secret_key, use_sign = true, currency = 'RUB')
       @public_key, @secret_key, @use_sign, @currency = public_key, secret_key, use_sign, currency
+      @base_url = 'https://' + @domain + '/pay'
     end
 
     def payment_url(sum, account, desc, options = {})
@@ -30,7 +30,7 @@ module Unitpay
 
     private
 
-    attr_reader :public_key, :secret_key, :currency, :use_sign
+    attr_reader :base_url, :public_key, :secret_key, :currency, :use_sign
 
     def calculate_sign(sum, account, desc)
       signature_of([ account, currency, desc, sum, secret_key ])
@@ -67,7 +67,7 @@ module Unitpay
     end
 
     def url(sum, account, desc, options)
-      "#{ URL }/#{ public_key }?#{ to_query(payment_params(sum, account, desc, options)) }"
+      "#{ base_url }/#{ public_key }?#{ to_query(payment_params(sum, account, desc, options)) }"
     end
 
     def to_query(hash)
