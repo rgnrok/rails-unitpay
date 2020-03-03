@@ -7,7 +7,7 @@
 
 Gem для подключения к платежному шлюзу [unitpay.money](http://unitpay.money) и [unitpay.ru](http://unitpay.ru).
 
-Документация к шлюзу [help.unitpay.ru](http://help.unitpay.money/) и [help.unitpay.ru](http://help.unitpay.ru/)
+Документация к шлюзу [help.unitpay.money](http://help.unitpay.money/) и [help.unitpay.ru](http://help.unitpay.ru/)
 
 - [Установка](#installation)
 - [Подключение](#setup)
