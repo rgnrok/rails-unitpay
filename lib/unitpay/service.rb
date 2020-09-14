@@ -4,7 +4,7 @@ module Unitpay
 
     def initialize(domain, public_key, secret_key, use_sign = true, currency = 'RUB')
       @public_key, @secret_key, @use_sign, @currency = public_key, secret_key, use_sign, currency
-      @base_url = 'https://' + @domain + '/pay'
+      @base_url = 'https://' + domain + '/pay'
     end
 
     def payment_url(sum, account, desc, options = {})
