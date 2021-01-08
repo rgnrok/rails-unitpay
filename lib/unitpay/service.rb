@@ -40,6 +40,7 @@ module Unitpay
       sign_params = params.dup
       sign_params.delete(:sign)
       sign_params.delete(:signature)
+      sign_params = sign_params.permit(sign_params.keys).to_h
 
       values = Hash[ sign_params.sort ].values + [ secret_key ]
       values.unshift(method)
